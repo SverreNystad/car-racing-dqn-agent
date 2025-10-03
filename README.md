@@ -16,7 +16,7 @@
 
 - [Car Racing DQN Agent](#car-racing-dqn-agent)
   - [Description](#description)
-  - [🛠️ Prerequisites](#️-prerequisites)
+  - [🛠️ Prerequisites](#%EF%B8%8F-prerequisites)
   - [Getting started](#getting-started)
   - [Usage](#usage)
     - [📖 Generate Documentation Site](#-generate-documentation-site)
@@ -60,13 +60,16 @@ For example: OS version, programs, libraries, etc.
    ```
 
 1. **Configure environment variables**:
-    This project uses environment variables for configuration. Copy the example environment file to create your own:
-    ```sh
-    cp .env.example .env
-    ```
-    Then edit the `.env` file to include your specific configuration settings.
+   This project uses environment variables for configuration. Copy the example environment file to create your own:
+
+   ```sh
+   cp .env.example .env
+   ```
+
+   Then edit the `.env` file to include your specific configuration settings.
 
 1. **Set up pre commit** (only for development):
+
    ```sh
    uv run pre-commit install
    ```
@@ -99,7 +102,6 @@ To run the test suite, run the following command from the root directory of the 
 ```bash
 uv run pytest --doctest-modules --cov=src --cov-report=html
 ```
-
 
 ### License
 

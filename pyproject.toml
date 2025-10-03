@@ -9,6 +9,8 @@ dependencies = [
     "gymnasium[box2d,other]>=1.2.1",
     "loguru>=0.7.3",
     "torch>=2.8.0",
+    "torchrl[utils]>=0.10.0",
+    "tqdm>=4.67.1",
     "wand>=0.6.13",
     "wandb>=0.22.1",
 ]
