@@ -14,10 +14,9 @@ class DQNAgent(Agent):
         self,
         state_shape: tuple,
         action_size: int,
-        epsilon: float = 1.0,
-        epsilon_decay: float = 0.995,
         epsilon_start: float = 1.0,
         epsilon_end: float = 0.01,
+        epsilon_decay_steps: int = 40_000,
         learning_rate: float = 0.001,
         discount_factor: float = 0.99,
         batch_size: int = 64,
@@ -39,13 +38,14 @@ class DQNAgent(Agent):
             tau (float): Soft update parameter for target network updates.
         """
         self.action_size = action_size
-        self.epsilon = epsilon
-        self.epsilon_decay = epsilon_decay
+        self.epsilon_start = epsilon_start
+        self.epsilon_end = epsilon_end
+        self.epsilon = epsilon_start
+        self.epsilon_decay_steps = epsilon_decay_steps
+
         self.learning_rate = learning_rate
         self.discount_factor = discount_factor
         self.batch_size = batch_size
-        self.epsilon_start = epsilon_start
-        self.epsilon_end = epsilon_end
         self.tau = tau
 
         # if GPU is to be used
@@ -81,6 +81,8 @@ class DQNAgent(Agent):
             amsgrad=True,
         )
         self.criterion = torch.nn.SmoothL1Loss()
+
+        self.global_step = 0
 
     def choose_action(self, observation) -> int:
         # Epsilon-greedy action selection
@@ -164,7 +166,7 @@ class DQNAgent(Agent):
                 self.target_model.parameters(), self.policy_network.parameters()
             ):
                 p_tgt.data.mul_(1.0 - self.tau).add_(p.data, alpha=self.tau)
-
+        self.decay_epsilon()
         return {
             "loss": float(loss.item()),
             "q_mean": float(q_sa.mean().item()),
@@ -189,3 +191,10 @@ class DQNAgent(Agent):
             next_observations,
             terminated,
         )
+
+    def decay_epsilon(self) -> None:
+        self.global_step += 1
+        # progress in [0,1]
+        p = min(1.0, self.global_step / float(self.epsilon_decay_steps))
+        # linear interpolation from start -> end
+        self.epsilon = self.epsilon_start + p * (self.epsilon_end - self.epsilon_start)
