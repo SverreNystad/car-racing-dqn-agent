@@ -5,6 +5,7 @@ from gymnasium.wrappers import (
     RecordEpisodeStatistics,
     RecordVideo,
     ResizeObservation,
+    FrameStackObservation,
 )
 
 
@@ -24,6 +25,8 @@ def create_env(
     - ActionFrameRepeater: Repeats each action for a specified number of frames.
     - RecordVideo: Records videos of episodes at a specified frequency.
     - RecordEpisodeStatistics: Records episode statistics such as total reward and length.
+    - FrameStackObservation: Stacks the last N frames to provide temporal context.
+
     Args:
         env_id (str): The Gymnasium environment ID.
         continuous (bool): Whether to create a continuous action space environment.
@@ -48,6 +51,7 @@ def create_env(
     if obs_shape and len(obs_shape) in {2, 3}:
         env = GrayscaleObservation(env)
         env = ResizeObservation(env, frame_size)
+        env = FrameStackObservation(env, stack_size=action_repeat)
 
     env = ActionFrameRepeater(env, action_repeat=action_repeat)
     if not video_folder_name:
