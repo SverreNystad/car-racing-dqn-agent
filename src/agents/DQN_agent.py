@@ -68,7 +68,9 @@ class DQNAgent(Agent):
         self.target_model.load_state_dict(self.model.state_dict())
 
         self.replay_buffer = TensorDictReplayBuffer(
-            storage=LazyMemmapStorage(300000, device=self.device),
+            storage=LazyMemmapStorage(
+                300000,
+            ),
             batch_size=[batch_size],
         )
 
