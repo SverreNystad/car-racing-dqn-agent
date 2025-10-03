@@ -16,6 +16,25 @@ def create_env(
     training_record_frequency: int = 250,
     frame_size: tuple[int, int] = (84, 84),
 ) -> gym.Env:
+    """Create and wrap a Gymnasium environment with common wrappers.
+
+    The environment is wrapped with:
+    - GrayscaleObservation: Converts RGB observations to grayscale.
+    - ResizeObservation: Resizes observations to the specified frame size.
+    - ActionFrameRepeater: Repeats each action for a specified number of frames.
+    - RecordVideo: Records videos of episodes at a specified frequency.
+    - RecordEpisodeStatistics: Records episode statistics such as total reward and length.
+    Args:
+        env_id (str): The Gymnasium environment ID.
+        continuous (bool): Whether to create a continuous action space environment.
+        video_folder_name (str | None): Folder to save recorded videos. If None, defaults
+            to "{env_id}-training".
+        action_repeat (int): Number of frames to repeat each action.
+        training_record_frequency (int): Frequency (in episodes) to record videos.
+        frame_size (tuple[int, int]): The desired frame size for observations.
+    Returns:
+        gym.Env: The wrapped Gymnasium environment.
+    """
     # Some environments (for example CartPole) do not accept a `continuous`
     try:
         env = gym.make(env_id, render_mode="rgb_array", continuous=continuous)
