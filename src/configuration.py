@@ -1,13 +1,15 @@
 import os
+from typing import Literal
 from pydantic import BaseModel
 import yaml
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config")
+CONFIG_PATH = "config"
 
 
 class Configuration(BaseModel):
     env: "EnvConfiguration"
     training: "TrainingConfiguration"
+    wandb: "WANDBConfiguration"
 
 
 class TrainingConfiguration(BaseModel):
@@ -37,7 +39,15 @@ class EnvConfiguration(BaseModel):
     frame_size: tuple[int, int] = (84, 84)
 
 
-def load_config(filename: str) -> Configuration:
+class WANDBConfiguration(BaseModel):
+    project_name: str
+    entity: str | None = None
+    mode: Literal["online", "offline", "disabled", "shared"] = (
+        "online"  # "offline" or "disabled" for no logging
+    )
+
+
+def load_config(filename: str) -> "Configuration":
     """
     Load a configuration file from the config directory.
     """

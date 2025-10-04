@@ -1,0 +1,26 @@
+env:
+  env_id: "CartPole-v1" # options: CartPole-v1, CarRacing-v3, LunarLander-v2
+  continuous: false
+  action_repeat: 4
+  training_record_frequency: 250
+  frame_size: [84, 84]
+
+training:
+  num_training_episodes: 30001
+  warmup_steps: 1000
+  seed: 42
+  shall_checkpoint_model: true
+
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  epsilon_decay_steps: 40000
+  learning_rate: 0.001
+  discount_factor: 0.99
+  batch_size: 64
+  tau: 0.005
+
+  replay_buffer_size: 100000
+
+wandb:
+  project_name: "DQN-CartPole-v1"
+  mode: "online"  # options: online, offline, disabled, shared
