@@ -30,7 +30,7 @@ class DQN(nn.Module):
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=4, stride=2),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(2592, 256),
+            nn.Linear(5184, 256),
             nn.ReLU(),
             nn.Linear(256, action_space_size),
         )
