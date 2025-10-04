@@ -4,6 +4,7 @@ from tensordict import TensorDict
 import torch
 from torchrl.data import TensorDictReplayBuffer, LazyMemmapStorage
 from torch.nn.utils import clip_grad_norm_
+import wandb
 
 from src.agent import Agent
 from src.network import DQN
@@ -68,11 +69,13 @@ class DQNAgent(Agent):
         ).to(self.device)
         self.target_model.load_state_dict(self.policy_network.state_dict())
 
+        # Track gradients/params (lightweight default)
+        wandb.watch(self.policy_network, log="gradients", log_freq=1000)
         self.replay_buffer = TensorDictReplayBuffer(
             storage=LazyMemmapStorage(
                 300000,
             ),
-            batch_size=[batch_size],
+            # batch_size=[batch_size],
         )
 
         self.optimizer = torch.optim.AdamW(
