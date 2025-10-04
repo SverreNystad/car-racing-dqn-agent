@@ -89,6 +89,9 @@ class DQNAgent(Agent):
         if self.epsilon > np.random.rand():
             return np.random.randint(self.action_size)
 
+        self.global_step += 1
+        self.decay_epsilon()
+
         state = (
             torch.tensor(observation, dtype=torch.float32).unsqueeze(0).to(self.device)
         )
@@ -123,14 +126,13 @@ class DQNAgent(Agent):
 
     def update(
         self,
-        batch_size: int,
     ) -> None:
         if len(self.replay_buffer) < self.batch_size:
             # Not enough experiences to sample a full batch
             return
 
         obs, actions, rewards, next_obs, terminated = self._sample_experiences(
-            batch_size
+            self.batch_size
         )
 
         # Ensure correct dtypes/shapes
@@ -196,5 +198,4 @@ class DQNAgent(Agent):
         self.global_step += 1
         # progress in [0,1]
         p = min(1.0, self.global_step / float(self.epsilon_decay_steps))
-        # linear interpolation from start -> end
         self.epsilon = self.epsilon_start + p * (self.epsilon_end - self.epsilon_start)
