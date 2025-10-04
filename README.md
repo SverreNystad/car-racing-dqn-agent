@@ -16,7 +16,7 @@
 
 - [Car Racing DQN Agent](#car-racing-dqn-agent)
   - [Description](#description)
-  - [🛠️ Prerequisites](#️-prerequisites)
+  - [🛠️ Prerequisites](#%EF%B8%8F-prerequisites)
   - [Getting started](#getting-started)
   - [Usage](#usage)
     - [📖 Generate Documentation Site](#-generate-documentation-site)
@@ -30,7 +30,6 @@
 <!-- TODO: Provide a brief overview of what this project does and its key features. Please add pictures or videos of the application -->
 
 ## 🛠️ Prerequisites
-
 
 - **Git**: Ensure that git is installed on your machine. [Download Git](https://git-scm.com/downloads)
 - **Python 3.12**: Required for the project. [Download Python](https://www.python.org/downloads/)

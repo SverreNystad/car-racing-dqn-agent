@@ -6,7 +6,6 @@ import os
 from dotenv import load_dotenv
 import wandb
 
-from src.agents.random_agent import RandomAgent
 from src.agents.DQN_agent import DQNAgent
 from src.environment import create_env
 
