@@ -22,3 +22,9 @@ class RandomAgent(Agent):
         next_observation,
     ) -> None:
         pass
+
+    def save_policy(self, policy_name: str) -> None:
+        pass
+
+    def load_policy(self, policy_name: str) -> None:
+        pass

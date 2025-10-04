@@ -36,3 +36,21 @@ class Agent(Protocol):
             dict: A dictionary containing relevant metrics from the update process (e.g., loss values).
         """
         ...
+
+    def save_policy(self, policy_name: str) -> None:
+        """
+        Save the current policy.
+
+        Args:
+            policy_name (str): The name to use when saving the policy.
+        """
+        ...
+
+    def load_policy(self, policy_name: str) -> None:
+        """
+        Load a saved policy into the agent.
+
+        Args:
+            policy_name (str): The name of the policy to load.
+        """
+        ...

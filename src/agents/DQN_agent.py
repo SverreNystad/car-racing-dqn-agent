@@ -1,3 +1,4 @@
+from loguru import logger
 import numpy as np
 
 from tensordict import TensorDict
@@ -202,3 +203,29 @@ class DQNAgent(Agent):
         # progress in [0,1]
         p = min(1.0, self.global_step / float(self.epsilon_decay_steps))
         self.epsilon = self.epsilon_start + p * (self.epsilon_end - self.epsilon_start)
+
+    def save_policy(self, policy_name: str) -> None:
+        """
+        Saves the policy network's parameters to WandB artifacts.
+        """
+
+        # Save your model.
+        torch.save(self.policy_network.state_dict(), f"{policy_name}.pth")
+        # Save as artifact for version control.
+        artifact = wandb.Artifact("model", type="model")
+        artifact.add_file(f"{policy_name}.pth")
+        wandb.log_artifact(artifact)
+        logger.info(f"Saved model as {policy_name}.pth and logged to WandB.")
+
+    def load_policy(self, policy_name: str) -> None:
+        """
+        Loads the policy network's parameters from a file.
+        """
+        artifact = wandb.use_artifact(policy_name, type="model")
+        artifact_dir = artifact.download()
+        # Load the model state dict into networks
+        self.policy_network.load_state_dict(
+            torch.load(f"{artifact_dir}/{policy_name}", map_location=self.device)
+        )
+        self.target_model.load_state_dict(self.policy_network.state_dict())
+        logger.info(f"Loaded model from {policy_name}.")
