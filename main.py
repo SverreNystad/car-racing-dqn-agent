@@ -10,17 +10,20 @@ SEED = 42
 
 if __name__ == "__main__":
     num_training_episodes = 30_001  # Total training episodes
-    environment = "LunarLander-v3"  # "LunarLander-v3"  # "CarRacing-v3"  # CartPole-v1 # LunarLander-v3
+    environment = "CartPole-v1"  # "LunarLander-v3"  # "CarRacing-v3"  # CartPole-v1 # LunarLander-v3
     env = create_env(environment, False)
     observation_shape = env.observation_space.shape
     action_size = env.action_space.n
+    warmup_steps = 5_000
+    total_steps = 0
 
     agent = DQNAgent(
         state_shape=observation_shape,
         action_size=action_size,
         learning_rate=0.001,
+        epsilon_decay_steps=num_training_episodes,
         discount_factor=0.99,
-        batch_size=64,
+        batch_size=128,
         tau=0.005,
     )
 
@@ -45,8 +48,11 @@ if __name__ == "__main__":
             agent.store(obs, action, float(reward), episode_over, next_obs)
 
             obs = next_obs
+            total_steps += 1
             episode_over = terminated or truncated
 
+            if total_steps >= warmup_steps:
+                agent.update()
         # Log episode statistics (available in info after episode ends)
         if "episode" in info:
             episode_data = info["episode"]
