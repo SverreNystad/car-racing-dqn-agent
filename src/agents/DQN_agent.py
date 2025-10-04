@@ -73,7 +73,7 @@ class DQNAgent(Agent):
         wandb.watch(self.policy_network, log="gradients", log_freq=1000)
         self.replay_buffer = TensorDictReplayBuffer(
             storage=LazyMemmapStorage(
-                300000,
+                max_size=50_000,
             ),
             # batch_size=[batch_size],
         )
@@ -129,10 +129,10 @@ class DQNAgent(Agent):
 
     def update(
         self,
-    ) -> None:
+    ) -> dict:
         if len(self.replay_buffer) < self.batch_size:
             # Not enough experiences to sample a full batch
-            return
+            return {}
 
         obs, actions, rewards, next_obs, terminated = self._sample_experiences(
             self.batch_size

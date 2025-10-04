@@ -26,12 +26,13 @@ class Agent(Protocol):
 
     def update(
         self,
-        batch_size: int,
-    ) -> None:
+    ) -> dict:
         """
         Update the agent's knowledge based on the experiences stored in the replay buffer.
 
         Args:
             batch_size (int): The number of experiences to sample from the replay buffer for each update
+        Returns:
+            dict: A dictionary containing relevant metrics from the update process (e.g., loss values).
         """
         ...

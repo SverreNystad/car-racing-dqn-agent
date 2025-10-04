@@ -10,8 +10,8 @@ class RandomAgent(Agent):
     def choose_action(self, observation) -> int:
         return np.random.randint(0, self._action_space)
 
-    def update(self, observation, action, reward, terminated, next_observation) -> None:
-        pass
+    def update(self) -> dict:
+        return {}
 
     def store(
         self,
