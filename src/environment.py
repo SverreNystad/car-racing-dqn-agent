@@ -38,6 +38,11 @@ def create_env(
     Returns:
         gym.Env: The wrapped Gymnasium environment.
     """
+    if any(dim <= 0 for dim in frame_size):
+        raise ValueError(
+            f"Invalid frame size {frame_size} for environment {env_id} all dimensions must be positive"
+        )
+
     # Some environments (for example CartPole) do not accept a `continuous`
     try:
         env = gym.make(env_id, render_mode="rgb_array", continuous=continuous)
