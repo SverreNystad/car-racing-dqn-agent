@@ -81,6 +81,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "gymnasium", extra = ["box2d", "other"] },
     { name = "loguru" },
+    { name = "python-dotenv" },
     { name = "torch" },
     { name = "torchrl", extra = ["utils"] },
     { name = "torchvision" },
@@ -109,6 +110,7 @@ docs = [
 requires-dist = [
     { name = "gymnasium", extras = ["box2d", "other"], specifier = ">=1.2.1" },
     { name = "loguru", specifier = ">=0.7.3" },
+    { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "torch", specifier = "==2.5.0" },
     { name = "torchrl", extras = ["utils"], specifier = ">=0.10.0" },
     { name = "torchvision", specifier = ">=0.17.0" },
