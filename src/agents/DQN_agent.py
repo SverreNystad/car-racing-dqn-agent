@@ -94,7 +94,7 @@ class DQNAgent(Agent):
             return np.random.randint(self.action_size)
 
         self.global_step += 1
-        self.decay_epsilon()
+        self._decay_epsilon()
 
         state = (
             torch.tensor(observation, dtype=torch.float32).unsqueeze(0).to(self.device)
@@ -172,7 +172,7 @@ class DQNAgent(Agent):
                 self.target_model.parameters(), self.policy_network.parameters()
             ):
                 p_tgt.data.mul_(1.0 - self.tau).add_(p.data, alpha=self.tau)
-        self.decay_epsilon()
+        self._decay_epsilon()
         return {
             "loss": float(loss.item()),
             "q_mean": float(q_sa.mean().item()),
@@ -198,7 +198,7 @@ class DQNAgent(Agent):
             terminated,
         )
 
-    def decay_epsilon(self) -> None:
+    def _decay_epsilon(self) -> None:
         self.global_step += 1
         # progress in [0,1]
         p = min(1.0, self.global_step / float(self.epsilon_decay_steps))
