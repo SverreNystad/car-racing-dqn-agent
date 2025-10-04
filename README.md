@@ -16,7 +16,7 @@
 
 - [Car Racing DQN Agent](#car-racing-dqn-agent)
   - [Description](#description)
-  - [🛠️ Prerequisites](#%EF%B8%8F-prerequisites)
+  - [🛠️ Prerequisites](#️-prerequisites)
   - [Getting started](#getting-started)
   - [Usage](#usage)
     - [📖 Generate Documentation Site](#-generate-documentation-site)
@@ -31,15 +31,12 @@
 
 ## 🛠️ Prerequisites
 
-<!-- TODO: In this section you put what is needed for the program to run.
-For example: OS version, programs, libraries, etc.  
-
--->
 
 - **Git**: Ensure that git is installed on your machine. [Download Git](https://git-scm.com/downloads)
 - **Python 3.12**: Required for the project. [Download Python](https://www.python.org/downloads/)
 - **UV**: Used for managing Python environments. [Install UV](https://docs.astral.sh/uv/getting-started/installation/)
-- **Docker** (optional): For DevContainer development. [Download Docker](https://www.docker.com/products/docker-desktop)
+- **WandB**: For experiment tracking and visualization. [Create an account](https://wandb.ai/site)
+- **CUDA**: If you plan to use GPU acceleration, ensure that CUDA is installed. [Install CUDA](https://developer.nvidia.com/cuda-downloads)
 
 ## Getting started
 
@@ -79,7 +76,7 @@ For example: OS version, programs, libraries, etc.
 To run the project, run the following command from the root directory of the project:
 
 ```bash
-
+uv run main.py
 ```
 
 <!-- TODO: Instructions on how to run the project and use its features. -->
