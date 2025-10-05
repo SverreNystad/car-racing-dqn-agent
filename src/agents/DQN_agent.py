@@ -107,26 +107,38 @@ class DQNAgent(Agent):
 
     def store(
         self,
-        observation,
+        observation: np.ndarray,
         action: int,
         reward: float,
         terminated: bool,
-        next_observation,
+        next_observation: np.ndarray,
     ) -> None:
-        self.replay_buffer.add(
-            TensorDict(
-                {
-                    "observation": torch.tensor(observation, dtype=torch.float32),
-                    "action": torch.tensor(action, dtype=torch.long),
-                    "reward": torch.tensor(reward, dtype=torch.float32),
-                    "next_observation": torch.tensor(
-                        next_observation, dtype=torch.float32
-                    ),
-                    "terminated": torch.tensor(terminated, dtype=torch.bool),
-                },
-                batch_size=[],
-            )
+        # Inputs are either frames (images) or 1D vectors (e.g., CartPole)
+        # Can save frames as uint8 to save memory, but otherwise float32 to not lose precision
+        observation_dtype = torch.uint8 if observation.ndim == 3 else torch.float32
+
+        td = TensorDict(
+            {
+                "observation": torch.as_tensor(
+                    observation, dtype=observation_dtype, device="cpu"
+                ).contiguous(),
+                "action": torch.as_tensor(action, dtype=torch.long, device="cpu").view(
+                    ()
+                ),
+                "reward": torch.as_tensor(
+                    reward, dtype=torch.float32, device="cpu"
+                ).view(()),
+                "terminated": torch.as_tensor(
+                    terminated, dtype=torch.bool, device="cpu"
+                ).view(()),
+                "next_observation": torch.as_tensor(
+                    next_observation, dtype=observation_dtype, device="cpu"
+                ).contiguous(),
+            },
+            batch_size=[],
         )
+
+        self.replay_buffer.add(td)
 
     def update(
         self,
@@ -183,20 +195,22 @@ class DQNAgent(Agent):
         if len(self.replay_buffer) < self.batch_size:
             raise ValueError("Not enough experiences in the replay buffer to sample.")
 
-        sampled_batch = self.replay_buffer.sample(amount)
-        observations = sampled_batch["observation"].to(self.device)
-        actions = sampled_batch["action"].to(self.device)
-        rewards = sampled_batch["reward"].squeeze().to(self.device)
-        next_observations = sampled_batch["next_observation"].to(self.device)
-        terminated = sampled_batch["terminated"].squeeze().to(self.device)
+        batch = self.replay_buffer.sample(amount)
+        batch = batch.to(self.device, non_blocking=True)
 
-        return (
-            observations,
-            actions,
-            rewards,
-            next_observations,
-            terminated,
-        )
+        obs = batch["observation"]
+        nxt = batch["next_observation"]
+
+        # For image observations stored as uint8, convert to float and scale to [0,1]
+        if obs.dtype == torch.uint8:
+            obs = obs.float().div_(255)
+            nxt = nxt.float().div_(255)
+
+        actions = batch["action"]
+        rewards = batch["reward"]
+        terminated = batch["terminated"]
+
+        return obs, actions, rewards, nxt, terminated
 
     def _decay_epsilon(self) -> None:
         self.global_step += 1
@@ -210,10 +224,11 @@ class DQNAgent(Agent):
         """
 
         # Save your model.
-        torch.save(self.policy_network.state_dict(), f"{policy_name}.pth")
+        FILE_NAME = f"models/{policy_name}.pth"
+        torch.save(self.policy_network.state_dict(), FILE_NAME)
         # Save as artifact for version control.
         artifact = wandb.Artifact("model", type="model")
-        artifact.add_file(f"{policy_name}.pth")
+        artifact.add_file(FILE_NAME)
         wandb.log_artifact(artifact)
         logger.info(f"Saved model as {policy_name}.pth and logged to WandB.")
 
