@@ -1,7 +1,7 @@
 [project]
 name = "car-racing-dqn-agent"
-version = "0.0.1"
-description = "Add your description here"
+version = "1.0.0"
+description = "This project implements a Deep Q-Network (DQN) agent to play the [CarRacing-v3](https://gymnasium.farama.org/environments/box2d/car_racing/) environment from OpenAI Gym. The agent is trained using reinforcement learning techniques to navigate the racetrack efficiently and managing to achieve max score for the environment, something I can not do myself."
 readme = "README.md"
 requires-python = ">=3.12"
 license-files = ["LICENSE"]
