@@ -1,7 +1,9 @@
+import os
 from loguru import logger
 import wandb
 from tqdm import trange
 from gymnasium import Env
+import glob
 
 from src.agent import Agent
 from src.configuration import TrainingConfiguration
@@ -10,6 +12,7 @@ from src.configuration import TrainingConfiguration
 def train(config: TrainingConfiguration, env: Env, agent: Agent):
     total_steps = 0
     best_reward = float("-inf")
+    last_logged_video: str | None = None
 
     for episode_num in trange(config.num_training_episodes):
         obs, info = env.reset()
@@ -62,6 +65,22 @@ def train(config: TrainingConfiguration, env: Env, agent: Agent):
                     wandb.log(
                         {"episode/avg_reward_last_100": avg_recent}, step=total_steps
                     )
+            # Upload video
+            video_dir = getattr(env, "video_folder_name", None)
+            if video_dir:
+                newest = _latest_video(video_dir)
+                if newest and newest != last_logged_video:
+                    wandb.log(
+                        {
+                            "videos/training": wandb.Video(
+                                newest,
+                                caption=f"Episode {episode_num}",
+                                format="mp4",
+                            )
+                        },
+                        step=total_steps,
+                    )
+                    last_logged_video = newest
 
             # Save the model if it's the best so far
             if config.shall_checkpoint_model and best_reward < current_reward:
@@ -72,3 +91,13 @@ def train(config: TrainingConfiguration, env: Env, agent: Agent):
                 )
 
     env.close()
+
+
+def _latest_video(video_dir: str) -> str | None:
+    """Return the path of the newest .mp4 file in video_dir, or None."""
+    if not os.path.isdir(video_dir):
+        return None
+    mp4s = glob.glob(os.path.join(video_dir, "*.mp4"))
+    if not mp4s:
+        return None
+    return max(mp4s, key=os.path.getmtime)

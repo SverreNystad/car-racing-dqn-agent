@@ -68,6 +68,8 @@ def create_env(
         episode_trigger=lambda x: x % training_record_frequency == 0,
     )
     env = RecordEpisodeStatistics(env)
+    # Make sure the trainer can find the videos
+    setattr(env, "video_folder_name", video_folder_name)
     return env
 
 
