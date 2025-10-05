@@ -1,8 +1,8 @@
 env:
-  env_id: "CartPole-v1" # options: CartPole-v1, CarRacing-v3, LunarLander-v2
+  env_id: "CarRacing-v3" # options: CartPole-v1, CarRacing-v3, LunarLander-v3
   continuous: false
   action_repeat: 4
-  training_record_frequency: 250
+  training_record_frequency: 10
   frame_size: [84, 84]
 
 training:
@@ -19,8 +19,8 @@ training:
   batch_size: 64
   tau: 0.005
 
-  replay_buffer_size: 100000
+  replay_buffer_size: 200
 
 wandb:
-  project_name: "DQN-CartPole-v1"
+  project_name: "DQN-CarRacing-v3"
   mode: "online"  # options: online, offline, disabled, shared
