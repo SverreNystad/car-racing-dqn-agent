@@ -1,7 +1,6 @@
 import os
 from loguru import logger
 import wandb
-from tqdm import trange
 from gymnasium import Env
 import glob
 
@@ -14,7 +13,7 @@ def train(config: TrainingConfiguration, env: Env, agent: Agent):
     best_reward = float("-inf")
     last_logged_video: str | None = None
 
-    for episode_num in trange(config.num_training_episodes):
+    for episode_num in range(config.num_training_episodes):
         obs, info = env.reset()
         episode_over = False
 
