@@ -232,15 +232,49 @@ class DQNAgent(Agent):
         wandb.log_artifact(artifact)
         logger.info(f"Saved model as {policy_name}.pth and logged to WandB.")
 
-    def load_policy(self, policy_name: str) -> None:
+    def load_policy(self, policy_path: str) -> None:
         """
         Loads the policy network's parameters from a file.
         """
-        artifact = wandb.use_artifact(policy_name, type="model")
-        artifact_dir = artifact.download()
-        # Load the model state dict into networks
+        logger.info(f"Loading model from {policy_path}")
         self.policy_network.load_state_dict(
-            torch.load(f"{artifact_dir}/{policy_name}", map_location=self.device)
+            torch.load(policy_path, map_location=self.device)
         )
         self.target_model.load_state_dict(self.policy_network.state_dict())
-        logger.info(f"Loaded model from {policy_name}.")
+        logger.info(f"Loaded model from {policy_path}.")
+        self.epsilon = 0
+
+
+def _download_model_file(policy_name: str) -> str:
+    artifact = wandb.use_artifact(policy_name, type="model")
+    artifact_dir = artifact.download()
+    return _find_latest_model_file(artifact_dir, policy_name)
+
+
+def _find_latest_model_file(artifact_dir: str, policy_name: str) -> str:
+    # The artifact may not contain a file named exactly after the artifact
+    # reference. Search for .pth files under the downloaded directory and
+    # pick the most appropriate one. Prefer an exact match if present,
+    # otherwise choose the largest .pth (most likely the full model).
+    import os
+    import glob
+
+    # Candidate: exact file (artifact_dir + policy_name + .pth)
+    exact_path = os.path.join(artifact_dir, f"{policy_name}.pth")
+    pth_path = None
+    if os.path.isfile(exact_path):
+        pth_path = exact_path
+    else:
+        # Search recursively for .pth files
+        candidates = glob.glob(
+            os.path.join(artifact_dir, "**", "*.pth"), recursive=True
+        )
+        if not candidates:
+            raise FileNotFoundError(
+                f"No .pth files found in artifact directory '{artifact_dir}'. "
+                f"Contents: {os.listdir(artifact_dir)}"
+            )
+        # Choose the largest candidate file (heuristic for best model file)
+        candidates.sort(key=lambda p: os.path.getsize(p), reverse=True)
+        pth_path = candidates[0]
+    return pth_path
