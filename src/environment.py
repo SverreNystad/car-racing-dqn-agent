@@ -94,6 +94,6 @@ class ActionFrameRepeater(gym.Wrapper):
         for _ in range(self._steps):
             state, reward, terminated, truncated, info = self.env.step(action)
             total_reward += float(reward)
-            if terminated:
+            if terminated or truncated:
                 break
         return state, total_reward, terminated, truncated, info
