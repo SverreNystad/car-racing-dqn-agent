@@ -137,7 +137,7 @@ uv run mkdocs build
 uv run mkdocs serve
 ```
 
-This will build the documentation and start a local server at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) where you can browse the docs and API reference. Get the documentation according to the lastes commit on main by viewing the `gh-pages` branch on GitHub: [https://cogitontnu.github.io/car-racing-dqn-agent/](https://cogitontnu.github.io/car-racing-dqn-agent/).
+This will build the documentation and start a local server at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) where you can browse the docs and API reference. Get the documentation according to the lastes commit on main by viewing the `gh-pages` branch on GitHub: [https://sverrenystad.github.io/car-racing-dqn-agent/](https://sverrenystad.github.io/car-racing-dqn-agent/).
 
 ## Testing
 
