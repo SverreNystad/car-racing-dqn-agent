@@ -8,15 +8,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Project Version](https://img.shields.io/badge/version-0.0.1-blue)](https://img.shields.io/badge/version-0.0.1-blue)
 
-<img src="docs/images/project-logo.webp" width="50%" alt="Cogito Project Logo" style="display: block; margin-left: auto; margin-right: auto;">
-</div>
 
 <details> 
 <summary><b>📋 Table of contents </b></summary>
 
 - [Car Racing DQN Agent](#car-racing-dqn-agent)
   - [Description](#description)
-  - [🛠️ Prerequisites](#%EF%B8%8F-prerequisites)
+  - [Features](#features)
+  - [Results](#results)
+  - [🛠️ Prerequisites](#️-prerequisites)
   - [Getting started](#getting-started)
   - [Usage](#usage)
     - [📖 Generate Documentation Site](#-generate-documentation-site)
@@ -27,7 +27,37 @@
 
 ## Description
 
-<!-- TODO: Provide a brief overview of what this project does and its key features. Please add pictures or videos of the application -->
+This project implements a Deep Q-Network (DQN) agent to play the [CarRacing-v3](https://gymnasium.farama.org/environments/box2d/car_racing/) environment from OpenAI Gym. The agent is trained using reinforcement learning techniques to navigate the racetrack efficiently and managing to achieve max score for the environment, something I can not do myself. 
+
+## Features
+
+- **DQN Implementation** — A fully functional Deep Q-Learning agent with:
+
+  - Experience replay (`TensorDictReplayBuffer`)
+  - Soft target updates
+  - Epsilon-greedy exploration
+  - Double DQN target computation
+  - Gradient clipping and AdamW optimization
+  - Integrated **Weights & Biases (W&B)** logging for metrics and model artifacts
+
+- **Environment Wrappers** — Preprocessing for Gymnasium environments including:
+
+  - Frame skipping, grayscale conversion, resizing, and frame stacking
+  - Automatic video recording and episode statistics tracking
+
+- **Configurable Training** — YAML-based configuration system using Pydantic for environment, training, and logging settings.
+
+- **Human Play** — Play the CarRacing-v3 environment using keyboard controls.
+
+## Results
+
+Here are some videos showing the performance of the trained DQN agent in several environments:
+[![Watch Results](https://img.youtube.com/vi/LQX-K7W1mms/0.jpg)](https://youtu.be/LQX-K7W1mms)
+[![Watch Results](https://img.youtube.com/vi/g4XEODjK5Zg/0.jpg)](https://youtu.be/g4XEODjK5Zg)
+[![Watch Results](https://img.youtube.com/vi/lTiU9PotseQ/0.jpg)](https://youtu.be/lTiU9PotseQ)
+
+Here is a plot showing the training performance of the DQN agent over time:
+![Reward over time](docs/images/dqn-car-racing.png)
 
 ## 🛠️ Prerequisites
 
@@ -39,9 +69,6 @@
 
 ## Getting started
 
-<!-- TODO: In this Section you describe how to install this project in its intended environment.(i.e. how to get it to run)  
--->
-
 1. **Clone the repository**:
 
    ```sh
@@ -49,13 +76,13 @@
    cd car-racing-dqn-agent
    ```
 
-1. **Install dependencies**:
+2. **Install dependencies**:
 
    ```sh
    uv sync
    ```
 
-1. **Configure environment variables**:
+3. **Configure environment variables**:
    This project uses environment variables for configuration. Copy the example environment file to create your own:
 
    ```sh
@@ -64,7 +91,7 @@
 
    Then edit the `.env` file to include your specific configuration settings.
 
-1. **Set up pre commit** (only for development):
+4. **Set up pre commit** (only for development):
 
    ```sh
    uv run pre-commit install
@@ -74,11 +101,31 @@
 
 To run the project, run the following command from the root directory of the project:
 
+To train a DQN agent using the default configuration, use:
+
 ```bash
-uv run main.py
+uv run main.py train
 ```
 
-<!-- TODO: Instructions on how to run the project and use its features. -->
+To train a DQN agent with a specific configuration file in `configs`, use:
+
+```bash
+uv run main.py train --config <name_of_config_file.yaml>
+```
+
+Then one can change the environment and agent parameters in the config file.
+
+To run a saved DQN agent, use:
+
+```bash
+uv run main.py run --agent-name <path_to_model_parameters>
+```
+
+To play the game using the keyboard, use:
+
+```bash
+uv run main.py play
+```
 
 ### 📖 Generate Documentation Site
 
