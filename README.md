@@ -7,7 +7,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/CogitoNTNU/car-racing-dqn-agent)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Project Version](https://img.shields.io/badge/version-0.0.1-blue)](https://img.shields.io/badge/version-0.0.1-blue)
-
+</div>
 
 <details> 
 <summary><b>📋 Table of contents </b></summary>
@@ -27,7 +27,7 @@
 
 ## Description
 
-This project implements a Deep Q-Network (DQN) agent to play the [CarRacing-v3](https://gymnasium.farama.org/environments/box2d/car_racing/) environment from OpenAI Gym. The agent is trained using reinforcement learning techniques to navigate the racetrack efficiently and managing to achieve max score for the environment, something I can not do myself. 
+This project implements a Deep Q-Network (DQN) agent to play the [CarRacing-v3](https://gymnasium.farama.org/environments/box2d/car_racing/) environment from OpenAI Gym. The agent is trained using reinforcement learning techniques to navigate the racetrack efficiently and managing to achieve max score for the environment, something I can not do myself.
 
 ## Features
 
@@ -76,13 +76,13 @@ Here is a plot showing the training performance of the DQN agent over time:
    cd car-racing-dqn-agent
    ```
 
-2. **Install dependencies**:
+1. **Install dependencies**:
 
    ```sh
    uv sync
    ```
 
-3. **Configure environment variables**:
+1. **Configure environment variables**:
    This project uses environment variables for configuration. Copy the example environment file to create your own:
 
    ```sh
@@ -91,7 +91,7 @@ Here is a plot showing the training performance of the DQN agent over time:
 
    Then edit the `.env` file to include your specific configuration settings.
 
-4. **Set up pre commit** (only for development):
+1. **Set up pre commit** (only for development):
 
    ```sh
    uv run pre-commit install
