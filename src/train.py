@@ -52,18 +52,6 @@ def train(config: TrainingConfiguration, env: Env, agent: Agent):
                 f"time={episode_data['t']:.2f}s"
             )
 
-            # Additional analysis for milestone episodes
-            if episode_num % 100 == 0:
-                # Look at recent performance (last 100 episodes)
-                recent_rewards = list(env.return_queue)[-100:]
-                if recent_rewards:
-                    avg_recent = sum(recent_rewards) / len(recent_rewards)
-                    logger.info(
-                        f"  -> Average reward over last 100 episodes: {avg_recent:.1f}"
-                    )
-                    wandb.log(
-                        {"episode/avg_reward_last_100": avg_recent}, step=total_steps
-                    )
             # Upload video
             video_dir = getattr(env, "video_folder_name", None)
             if video_dir:
