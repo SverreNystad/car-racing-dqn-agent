@@ -7,6 +7,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/CogitoNTNU/car-racing-dqn-agent)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Project Version](https://img.shields.io/badge/version-0.0.1-blue)](https://img.shields.io/badge/version-0.0.1-blue)
+
 </div>
 
 <details> 
@@ -16,7 +17,7 @@
   - [Description](#description)
   - [Features](#features)
   - [Results](#results)
-  - [🛠️ Prerequisites](#️-prerequisites)
+  - [Prerequisites](#prerequisites)
   - [Getting started](#getting-started)
   - [Usage](#usage)
     - [📖 Generate Documentation Site](#-generate-documentation-site)
@@ -59,7 +60,7 @@ Here are some videos showing the performance of the trained DQN agent in several
 Here is a plot showing the training performance of the DQN agent over time:
 ![Reward over time](docs/images/dqn-car-racing.png)
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 - **Git**: Ensure that git is installed on your machine. [Download Git](https://git-scm.com/downloads)
 - **Python 3.12**: Required for the project. [Download Python](https://www.python.org/downloads/)
