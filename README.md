@@ -73,7 +73,7 @@ Here is a plot showing the training performance of the DQN agent over time:
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/CogitoNTNU/car-racing-dqn-agent.git
+   git clone https://github.com/SverreNystad/car-racing-dqn-agent.git
    cd car-racing-dqn-agent
    ```
 
