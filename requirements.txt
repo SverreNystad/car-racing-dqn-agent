@@ -1151,9 +1151,9 @@ swig==4.3.1.post0 \
     --hash=sha256:ee44c9d7e24e6e3317e2a5a521af321b27d116c8e91fc5ca81ef7dd40a280abd \
     --hash=sha256:f14fd962a29403cee96abbbeffaecdf2bbfecb5025e19dfbc774fdb708be2562 \
     --hash=sha256:fb09b4c2aebe3e55e919d53b803ddc0482f1cf71daa6560c081c4c05ff537895
-sympy==1.13.1 \
-    --hash=sha256:9cebf7e04ff162015ce31c9c6c9144daa34a93bd082f54fd8f12deca4f47515f \
-    --hash=sha256:db36cdc64bf61b9b24578b6f7bab1ecdd2452cf008f34faa33776680c26d66f8
+sympy==1.14.0 \
+    --hash=sha256:d3d3fe8df1e5a0b42f0e7bdf50541697dbe7d23746e894990c030e2b05e72517 \
+    --hash=sha256:e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5
 tensorboard==2.20.0 \
     --hash=sha256:9dc9f978cb84c0723acf9a345d96c184f0293d18f166bb8d59ee098e6cfaaba6
 tensorboard-data-server==0.7.2 \
