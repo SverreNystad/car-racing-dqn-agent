@@ -12,7 +12,7 @@ dependencies = [
     "python-dotenv>=1.1.1",
     "torch==2.11.0",
     "torchrl[utils]>=0.10.0",
-    "torchvision>=0.17.0",
+    "torchvision>=0.26.0",
     "tqdm>=4.67.1",
     "wand>=0.6.13",
     "wandb>=0.22.1",

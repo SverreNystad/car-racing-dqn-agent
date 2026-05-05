@@ -115,7 +115,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "torch", specifier = "==2.11.0" },
     { name = "torchrl", extras = ["utils"], specifier = ">=0.10.0" },
-    { name = "torchvision", specifier = ">=0.17.0" },
+    { name = "torchvision", specifier = ">=0.26.0" },
     { name = "tqdm", specifier = ">=4.67.1" },
     { name = "wand", specifier = ">=0.6.13" },
     { name = "wandb", specifier = ">=0.22.1" },
