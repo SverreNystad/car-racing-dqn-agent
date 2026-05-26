@@ -9,7 +9,7 @@ dependencies = [
     "gymnasium[box2d,other]>=1.2.1",
     "loguru>=0.7.3",
     "pydantic>=2.13.4",
-    "python-dotenv>=1.1.1",
+    "python-dotenv>=1.2.2",
     "torch==2.11.0",
     "torchrl[utils]>=0.10.0",
     "torchvision>=0.26.0",
