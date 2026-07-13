@@ -134,7 +134,7 @@ requires-dist = [
     { name = "torchrl", extras = ["utils"], specifier = ">=0.10.0" },
     { name = "torchvision", specifier = ">=0.26.0" },
     { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "wand", specifier = ">=0.6.13" },
+    { name = "wand", specifier = ">=0.7.2" },
     { name = "wandb", specifier = ">=0.22.1" },
 ]
 
@@ -2341,11 +2341,11 @@ wheels = [
 
 [[package]]
 name = "wand"
-version = "0.7.0"
+version = "0.7.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c5/f6/feb40fadb7f3a6c5d45c02840c329725f6ec907eb3581c5de27445700e8a/wand-0.7.0.tar.gz", hash = "sha256:e48f983cc248c23f752e5ba8a6aa1b09370c87d81425d2cc7474f4536c0740f9", size = 11888946, upload-time = "2026-02-23T14:50:34.79Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/27/98de4383d028df318b9dd56e7ac2a8437684db18c2da7204c084f37e8f95/wand-0.7.2.tar.gz", hash = "sha256:0387fd08848d00cadd1d885fcb19a17dd4250df2029e5338b6b668b7fed64b5b", size = 11889993, upload-time = "2026-06-25T13:48:31.512Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/29/6c/51fe13d260d9e910d8f010494cc513420ab79852662fefdebdecfeaeebd5/wand-0.7.0-py3-none-any.whl", hash = "sha256:197a5011891a68fc14558cac58db5f5aafb66ef1dd28bfb4a2c62c156c41712e", size = 144773, upload-time = "2026-02-23T14:50:46.162Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/11/764bee6e793c01d6ce7b99f4872f9fd5ef89904b172cb9d8a0a1dae02f21/wand-0.7.2-py3-none-any.whl", hash = "sha256:7db97c5e51862fdd5e58866dbf34e2dcae295245511147367690a3e17f459984", size = 145045, upload-time = "2026-06-25T13:48:38.348Z" },
 ]
 
 [[package]]
