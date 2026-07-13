@@ -14,7 +14,7 @@ dependencies = [
     "torchrl[utils]>=0.10.0",
     "torchvision>=0.26.0",
     "tqdm>=4.67.1",
-    "wand>=0.6.13",
+    "wand>=0.7.2",
     "wandb>=0.22.1",
 ]
 
