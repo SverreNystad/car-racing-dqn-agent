@@ -1000,9 +1000,9 @@ nvidia-cusparse-cu12==12.5.10.65 ; platform_machine == 'x86_64' and sys_platform
     --hash=sha256:221c73e7482dd93eda44e65ce567c031c07e2f93f6fa0ecd3ba876a195023e83 \
     --hash=sha256:73060ce019ac064a057267c585bf1fd5a353734151f87472ff02b2c5c9984e78 \
     --hash=sha256:9e487468a22a1eaf1fbd1d2035936a905feb79c4ce5c2f67626764ee4f90227c
-nvidia-nccl-cu12==2.29.7 ; platform_machine == 'x86_64' and sys_platform == 'linux' \
-    --hash=sha256:0cf032ee22b560447daf0456108a75e32bd74a4de6c6b64725637a359fa48cd8 \
-    --hash=sha256:ecd0a012051abc20c1aa87328841efa8cade3ced65803046e38c2f03c0891fea
+nvidia-nccl-cu12==2.32.6 ; platform_machine == 'x86_64' and sys_platform == 'linux' \
+    --hash=sha256:2a6e6d5ddfc08970eca872be3dfa2650b24fa10a2043974465a9cae9c64ed6d8 \
+    --hash=sha256:7a458829e9d3168d7be2247f819991ffc12e65f1a05ba269f4f635b9451076bb
 nvidia-nvjitlink-cu12==12.9.86 ; platform_machine == 'x86_64' and sys_platform == 'linux' \
     --hash=sha256:994a05ef08ef4b0b299829cde613a424382aff7efb08a7172c1fa616cc3af2ca \
     --hash=sha256:cc6fcec260ca843c10e34c936921a1c426b351753587fdd638e8cff7b16bb9db \
